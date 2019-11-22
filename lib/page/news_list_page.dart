@@ -12,7 +12,9 @@ import 'package:daily_news/widget/news_item_widget.dart';
 import 'package:flutter/material.dart';
 
 class NewsListPage extends StatefulWidget {
-  NewsListPage({Key key}) : super(key: key);
+  final String type;
+
+  NewsListPage({Key key, this.type = 'top'}) : super(key: key);
 
   @override
   _NewsListPageState createState() => _NewsListPageState();
@@ -24,7 +26,7 @@ class _NewsListPageState extends State<NewsListPage>
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((callback) {
-      Store.value<NewsProvider>(context).fetchNews();
+      Store.value<NewsProvider>(context).fetchNews(type: widget.type);
     });
   }
 
@@ -32,18 +34,23 @@ class _NewsListPageState extends State<NewsListPage>
   Widget build(BuildContext context) {
     super.build(context);
     return Scaffold(
-       body: Store.connect<NewsProvider>(
+      body: Store.connect<NewsProvider>(
           builder: (BuildContext context, NewsProvider provider, child) {
-        return ListView.builder(
-          itemBuilder: _itemBuilder,
-          itemCount: provider.newsList.length,
+        return RefreshIndicator(
+          onRefresh: _onRefresh,
+          child: ListView.builder(
+            itemBuilder: _itemBuilder,
+            itemCount: provider.newsList(type: widget.type).length,
+          ),
         );
       }),
     );
   }
 
   Widget _itemBuilder(BuildContext context, int index) {
-    News news = Store.value<NewsProvider>(context).newsList[index];
+    News news =
+        Store.value<NewsProvider>(context).newsList(type: widget.type)[index];
+
     return NewsItemWidget(
       onTap: () {
         Navigator.pushNamed(context, Routes.newsDetail, arguments: news);
@@ -54,4 +61,8 @@ class _NewsListPageState extends State<NewsListPage>
 
   @override
   bool get wantKeepAlive => true;
+
+  Future<Null> _onRefresh() async {
+    Store.value<NewsProvider>(context).fetchNews(type: widget.type);
+  }
 }

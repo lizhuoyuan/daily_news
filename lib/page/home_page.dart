@@ -6,7 +6,6 @@
 
 import 'package:daily_news/config/constant.dart';
 import 'package:daily_news/page/empty_page.dart';
-import 'package:daily_news/page/news_list_page.dart';
 import 'package:daily_news/page/user_center_page.dart';
 import 'package:daily_news/store/home_page_provider.dart';
 import 'package:daily_news/store/index.dart';
@@ -15,6 +14,8 @@ import 'package:daily_news/util/utils.dart';
 import 'package:firebase_admob/firebase_admob.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+
+import 'news_all_page.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key}) : super(key: key);
@@ -33,7 +34,7 @@ class _HomePageState extends State<HomePage> {
   var _appTabBarTitles = ['新闻', '发现', '我的'];
   var _icons = [Icons.fiber_new, Icons.disc_full, Icons.person];
   var _colors = [Colors.blue, Colors.pink, Colors.green, Colors.red];
-  var _pages = [NewsListPage(), EmptyPage(), UserCenterPage()];
+  var _pages = [NewsAllPage(), EmptyPage(), UserCenterPage()];
 
   List<BottomNavigationBarItem> _bottomTabs() {
     List<BottomNavigationBarItem> list = [];

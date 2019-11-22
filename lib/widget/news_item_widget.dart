@@ -41,7 +41,7 @@ class NewsItemWidget extends StatelessWidget {
           children: <Widget>[
             Text(
               '${news.title}',
-              style: MyTextStyle.titleStyle,
+              style: TextStyles.titleStyle,
             ),
             SizedBox(height: 5),
             Row(
@@ -75,12 +75,12 @@ class NewsItemWidget extends StatelessWidget {
               children: <Widget>[
                 Text(
                   '${news.authorName}',
-                  style: MyTextStyle.mainStyle,
+                  style: TextStyles.mainStyle,
                 ),
                 SizedBox(width: 5),
                 Text(
                   '${news.date}',
-                  style: MyTextStyle.mainStyle,
+                  style: TextStyles.mainStyle,
                 ),
               ],
             ),

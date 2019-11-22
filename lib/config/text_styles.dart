@@ -6,7 +6,7 @@
 
 import 'package:flutter/material.dart';
 
-class MyTextStyle {
+class TextStyles {
   static final titleStyle = TextStyle(
     color: Colors.black,
     fontSize: 18,
@@ -15,5 +15,9 @@ class MyTextStyle {
   static final mainStyle = TextStyle(
     color: Colors.black54,
     fontSize: 14,
+  );
+
+  static final tabStyle = TextStyle(
+    fontSize: 18,
   );
 }
