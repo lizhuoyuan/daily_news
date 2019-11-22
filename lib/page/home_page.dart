@@ -4,12 +4,15 @@
  *
  */
 
+import 'package:daily_news/config/constant.dart';
 import 'package:daily_news/page/empty_page.dart';
 import 'package:daily_news/page/news_list_page.dart';
 import 'package:daily_news/page/user_center_page.dart';
 import 'package:daily_news/store/home_page_provider.dart';
 import 'package:daily_news/store/index.dart';
 import 'package:daily_news/store/news_provider.dart';
+import 'package:daily_news/util/utils.dart';
+import 'package:firebase_admob/firebase_admob.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
@@ -25,6 +28,7 @@ class _HomePageState extends State<HomePage> {
   PageController _pageController;
 
   DateTime _lastClickTime;
+  InterstitialAd _interstitialAd;
 
   var _appTabBarTitles = ['新闻', '发现', '我的'];
   var _icons = [Icons.fiber_new, Icons.disc_full, Icons.person];
@@ -46,6 +50,8 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
+    loadInterstitialAd();
+
     _pageController = PageController();
     WidgetsBinding.instance.addPostFrameCallback((callback) {
       Store.value<NewsProvider>(context).fetchNews();
@@ -90,6 +96,20 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
+  void loadInterstitialAd() {
+    _interstitialAd?.dispose();
+    _interstitialAd = createInterstitialAd()
+      ..load()
+      ..show();
+  }
+
+  InterstitialAd createInterstitialAd() {
+    return InterstitialAd(
+      adUnitId: adInterstitialId,
+      targetingInfo: Utils.targetingInfo,
+    );
+  }
+
   Future<bool> doubleClickBack() async {
     if (_lastClickTime == null ||
         DateTime.now().difference(_lastClickTime) > Duration(seconds: 1)) {
@@ -99,5 +119,11 @@ class _HomePageState extends State<HomePage> {
     } else {
       return true;
     }
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _interstitialAd?.dispose();
   }
 }

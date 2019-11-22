@@ -4,11 +4,8 @@
  *
  */
 
-import 'package:daily_news/config/constant.dart';
 import 'package:daily_news/config/images.dart';
 import 'package:daily_news/config/routes.dart';
-import 'package:daily_news/util/utils.dart';
-import 'package:firebase_admob/firebase_admob.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -18,27 +15,12 @@ class SplashPage extends StatefulWidget {
 }
 
 class _SplashPageState extends State<SplashPage> {
-  InterstitialAd _interstitialAd;
-
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((callback) {
       goHome();
     });
-    loadInterstitialAd();
-  }
-
-  InterstitialAd createInterstitialAd() {
-    return InterstitialAd(
-      adUnitId: adInterstitialId,
-      targetingInfo: Utils.targetingInfo,
-      listener: (MobileAdEvent event) {
-        if (event == MobileAdEvent.opened) {
-          goHome();
-        }
-      },
-    );
   }
 
   @override
@@ -54,13 +36,6 @@ class _SplashPageState extends State<SplashPage> {
       ),
       onTap: goHome,
     );
-  }
-
-  void loadInterstitialAd() {
-    _interstitialAd?.dispose();
-    _interstitialAd = createInterstitialAd()
-      ..load()
-      ..show();
   }
 
   void goHome() {

@@ -6,7 +6,6 @@
 
 import 'package:daily_news/bean/news.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class NewsDetailPage extends StatefulWidget {
