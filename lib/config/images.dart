@@ -6,7 +6,7 @@
 
 class Images {
   static const String splashBackground =
-      'android/app/src/main/res/mipmap-xxhdpi/splash_background.png';
+      'android/app/src/main/res/mipmap-xxhdpi/splash_background.jpg';
 
   static const String logo = 'android/app/src/main/res/mipmap-xxhdpi/logo.png';
 }

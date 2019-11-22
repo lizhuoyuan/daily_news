@@ -31,7 +31,7 @@ flutter:
 
   assets:
     - images/
-    - android/app/src/main/res/mipmap-xxhdpi/splash_background.png
+    - android/app/src/main/res/mipmap-xxhdpi/splash_background.jpg
     - android/app/src/main/res/mipmap-xxhdpi/logo.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
