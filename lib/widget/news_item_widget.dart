@@ -18,7 +18,7 @@ class NewsItemWidget extends StatelessWidget {
   final News news;
   final Function onTap;
 
-  NewsItemWidget({this.news,this.onTap});
+  NewsItemWidget({this.news, this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -53,20 +53,18 @@ class NewsItemWidget extends StatelessWidget {
                   width: imageWidth,
                   height: height,
                 ),
-                size > 1
-                    ? CachedImage(
-                        image: news.thumbnailPicS02,
-                        width: imageWidth,
-                        height: height,
-                      )
-                    : SizedBox(),
-                size > 2
-                    ? CachedImage(
-                        image: news.thumbnailPicS03,
-                        width: imageWidth,
-                        height: height,
-                      )
-                    : SizedBox(),
+                if (size > 1)
+                  CachedImage(
+                    image: news.thumbnailPicS02,
+                    width: imageWidth,
+                    height: height,
+                  ),
+                if (size > 2)
+                  CachedImage(
+                    image: news.thumbnailPicS03,
+                    width: imageWidth,
+                    height: height,
+                  )
               ],
             ),
             SizedBox(height: 5),
